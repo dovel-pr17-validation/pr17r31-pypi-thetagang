@@ -1,0 +1,43 @@
+def redgreen(value: float) -> str:
+    if value >= 0:
+        return "green"
+    return "red"
+
+
+def dfmt(amount: str | float | None, precision: int = 2) -> str:
+    if amount is not None:
+        amount = float(amount)
+        rg = redgreen(amount)
+        return f"[{rg}]${amount:,.{precision}f}[/{rg}]"
+    return ""
+
+
+def pfmt(amount: str | float | None, precision: int = 2) -> str:
+    if amount is None:
+        return ""
+    amount = float(amount) * 100.0
+    rg = redgreen(amount)
+    return f"[{rg}]{amount:.{precision}f}%[/{rg}]"
+
+
+def ffmt(amount: float | None, precision: int = 2) -> str:
+    if amount is not None:
+        amount = float(amount)
+        rg = redgreen(amount)
+        return f"[{rg}]{amount:.{precision}f}[/{rg}]"
+    return ""
+
+
+def ifmt(amount: int | None) -> str:
+    if amount is not None:
+        amount = int(amount)
+        rg = redgreen(amount)
+        return f"[{rg}]{amount:,d}[/{rg}]"
+    return ""
+
+
+def to_camel_case(snake_str: str) -> str:
+    components = snake_str.split("_")
+    # We capitalize the first letter of each component except the first one
+    # with the 'title' method and join them together.
+    return components[0] + "".join(x.title() for x in components[1:])
